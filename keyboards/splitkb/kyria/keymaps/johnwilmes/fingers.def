@@ -1,0 +1,7 @@
+FINGERS_MACRO(\
+L_PINKY_OU, L_PINKY_U, L_RING_U, L_MIDDLE_U, L_INDEX_U , L_INDEX_OU,                                               R_INDEX_OU, R_INDEX_U , R_MIDDLE_U, R_RING_U, R_PINKY_U, R_PINKY_OU,\
+L_PINKY_O , L_PINKY  , L_RING  , L_MIDDLE  , L_INDEX   , L_INDEX_O ,                                               R_INDEX_O , R_INDEX   , R_MIDDLE  , R_RING  , R_PINKY  , R_PINKY_O ,\
+L_PINKY_OD, L_PINKY_D, L_RING_D, L_MIDDLE_D, L_INDEX_D , L_INDEX_OD, L_THUMB_U, L_THUMB_OU, R_THUMB_OU, R_THUMB_U, R_INDEX_OD, R_INDEX_D , R_MIDDLE_D, R_RING_D, R_PINKY_D, R_PINKY_OD,\
+                                 L_THUMB_I3, L_THUMB_I2, L_THUMB_I1, L_THUMB  , L_THUMB_O , R_THUMB_O , R_THUMB  , R_THUMB_I1, R_THUMB_I2, R_THUMB_I3\
+)
+
