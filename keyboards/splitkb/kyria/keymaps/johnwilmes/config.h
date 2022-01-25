@@ -19,7 +19,6 @@
 // Lets you roll mod-tap keys
 //#define IGNORE_MOD_TAP_INTERRUPT
 
-#define COMBO_COUNT 10
 #define COMBO_TERM 25
 #define COMBO_ONLY_FROM_LAYER 1
 #define COMBO_CONTIGUOUS_PER_COMBO

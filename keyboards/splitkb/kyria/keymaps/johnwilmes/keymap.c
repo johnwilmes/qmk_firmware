@@ -30,41 +30,97 @@ void keyboard_post_init_user(void) {
  **********/
 
 enum my_combos {
-  COMBO_BACKSPACE,
-  COMBO_ESCAPE,
+  // Left hand mod-layer combos
   COMBO_LSHIFT,
   COMBO_LCTRL,
   COMBO_LALT,
   COMBO_LGUI,
+  COMBO_SYM_SHIFT,
+  COMBO_SYM_CTRL,
+  COMBO_SYM_ALT,
+  COMBO_SYM_GUI,
+  COMBO_NUM_SHIFT,
+  COMBO_NUM_CTRL,
+  COMBO_NUM_ALT,
+  COMBO_NUM_GUI,
+  // Right hand mod-layer combos
   COMBO_RSHIFT,
   COMBO_RCTRL,
   COMBO_RALT,
   COMBO_RGUI,
-  COMBO_LENGTH
-};
+  COMBO_SYS_SHIFT,
+  COMBO_SYS_CTRL,
+  COMBO_SYS_ALT,
+  COMBO_SYS_GUI,
+  COMBO_NAV_SHIFT,
+  COMBO_NAV_CTRL,
+  COMBO_NAV_ALT,
+  COMBO_NAV_GUI,
 
-const uint16_t PROGMEM combo_backspace[] = {R_INDEX, R_INDEX_O, COMBO_END};
-const uint16_t PROGMEM combo_escape[] = {L_INDEX, L_INDEX_O, COMBO_END};
+  COMBO_ESCAPE,
+  COMBO_DELETE,
+  COMBO_BACKSPACE,
+
+  COMBO_LENGTH,
+};
+uint16_t COMBO_LEN = COMBO_LENGTH;
+
 const uint16_t PROGMEM combo_lshift[] = {L_THUMB_I1, L_INDEX, COMBO_END};
 const uint16_t PROGMEM combo_lctrl[] = {L_THUMB_I1, L_MIDDLE, COMBO_END};
 const uint16_t PROGMEM combo_lalt[] = {L_THUMB_I1, L_RING, COMBO_END};
 const uint16_t PROGMEM combo_lgui[] = {L_THUMB_I1, L_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_sym_shift[] = {L_THUMB, L_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_sym_ctrl[] = {L_THUMB, L_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_sym_alt[] = {L_THUMB, L_RING, COMBO_END};
+const uint16_t PROGMEM combo_sym_gui[] = {L_THUMB, L_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_num_shift[] = {L_THUMB_O, L_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_num_ctrl[] = {L_THUMB_O, L_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_num_alt[] = {L_THUMB_O, L_RING, COMBO_END};
+const uint16_t PROGMEM combo_num_gui[] = {L_THUMB_O, L_PINKY, COMBO_END};
 const uint16_t PROGMEM combo_rshift[] = {R_THUMB_I1, R_INDEX, COMBO_END};
 const uint16_t PROGMEM combo_rctrl[] = {R_THUMB_I1, R_MIDDLE, COMBO_END};
 const uint16_t PROGMEM combo_ralt[] = {R_THUMB_I1, R_RING, COMBO_END};
 const uint16_t PROGMEM combo_rgui[] = {R_THUMB_I1, R_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_nav_shift[] = {R_THUMB, R_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_nav_ctrl[] = {R_THUMB, R_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_nav_alt[] = {R_THUMB, R_RING, COMBO_END};
+const uint16_t PROGMEM combo_nav_gui[] = {R_THUMB, R_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_sys_shift[] = {R_THUMB_O, R_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_sys_ctrl[] = {R_THUMB_O, R_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_sys_alt[] = {R_THUMB_O, R_RING, COMBO_END};
+const uint16_t PROGMEM combo_sys_gui[] = {R_THUMB_O, R_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_escape[] = {R_INDEX_U, R_MIDDLE_U, R_RING_U, COMBO_END};
+const uint16_t PROGMEM combo_backspace[] = {R_INDEX_U, R_MIDDLE_U, COMBO_END};
+const uint16_t PROGMEM combo_delete[] = {R_MIDDLE_U, R_RING_U, COMBO_END};
 
-combo_t key_combos[COMBO_COUNT] = {
-  [COMBO_BACKSPACE] = COMBO(combo_backspace, KC_BSPC),
-  [COMBO_ESCAPE] = COMBO(combo_escape, KC_ESC),
+combo_t key_combos[] = {
   [COMBO_LSHIFT] = COMBO_ACTION(combo_lshift),
   [COMBO_LCTRL] = COMBO_ACTION(combo_lctrl),
   [COMBO_LALT] = COMBO_ACTION(combo_lalt),
   [COMBO_LGUI] = COMBO_ACTION(combo_lgui),
+  [COMBO_SYM_SHIFT] = COMBO_ACTION(combo_sym_shift),
+  [COMBO_SYM_CTRL] = COMBO_ACTION(combo_sym_ctrl),
+  [COMBO_SYM_ALT] = COMBO_ACTION(combo_sym_alt),
+  [COMBO_SYM_GUI] = COMBO_ACTION(combo_sym_gui),
+  [COMBO_NUM_SHIFT] = COMBO_ACTION(combo_num_shift),
+  [COMBO_NUM_CTRL] = COMBO_ACTION(combo_num_ctrl),
+  [COMBO_NUM_ALT] = COMBO_ACTION(combo_num_alt),
+  [COMBO_NUM_GUI] = COMBO_ACTION(combo_num_gui),
   [COMBO_RSHIFT] = COMBO_ACTION(combo_rshift),
   [COMBO_RCTRL] = COMBO_ACTION(combo_rctrl),
   [COMBO_RALT] = COMBO_ACTION(combo_ralt),
   [COMBO_RGUI] = COMBO_ACTION(combo_rgui),
+  [COMBO_NAV_SHIFT] = COMBO_ACTION(combo_nav_shift),
+  [COMBO_NAV_CTRL] = COMBO_ACTION(combo_nav_ctrl),
+  [COMBO_NAV_ALT] = COMBO_ACTION(combo_nav_alt),
+  [COMBO_NAV_GUI] = COMBO_ACTION(combo_nav_gui),
+  [COMBO_SYS_SHIFT] = COMBO_ACTION(combo_sys_shift),
+  [COMBO_SYS_CTRL] = COMBO_ACTION(combo_sys_ctrl),
+  [COMBO_SYS_ALT] = COMBO_ACTION(combo_sys_alt),
+  [COMBO_SYS_GUI] = COMBO_ACTION(combo_sys_gui),
+  [COMBO_ESCAPE] = COMBO(combo_escape, KC_ESC),
+  [COMBO_BACKSPACE] = COMBO(combo_backspace, KC_BSPC),
+  [COMBO_DELETE] = COMBO(combo_delete, KC_DEL),
 };
 
 static uint8_t combo_mod_state = 0;
@@ -267,7 +323,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        XXXXXXX, KC_W, KC_F,  KC_M ,   KC_P ,    KC_V  ,                                                    KC_K  , MY_DASH, MY_LINE, KC_SEMICOLON, KC_J, XXXXXXX,
        XXXXXXX, KC_R, KC_S,  KC_N ,   KC_T ,    KC_G  ,                                                  KC_QUOTE,   KC_A ,   KC_E ,     KC_I    , KC_H, XXXXXXX,
        XXXXXXX, KC_X, KC_C,  KC_L ,   KC_D ,    KC_B  , LAYER_LOCK,   XXXXXXX,      XXXXXXX, LAYER_LOCK,    KC_Z ,   KC_U ,   KC_O ,     KC_Y    , KC_Q, XXXXXXX,
-                           XXXXXXX,  KC_TAB, KC_SPACE ,  SYM_ENTER, NUM_ROCKET,   NAV_MAGIC,   MY_COMMA,   MY_DOT, LYR_SYS, XXXXXXX
+                           XXXXXXX,KC_ENTER, KC_SPACE ,  SYM_TAB  ,NUM_ROCKET,    SYS_MAGIC,    NAV_   ,   MY_DOT,MY_COMMA, XXXXXXX
     ),
 
 /* Symbol Layer

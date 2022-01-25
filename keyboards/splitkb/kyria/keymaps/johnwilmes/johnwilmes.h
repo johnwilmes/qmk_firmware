@@ -46,7 +46,7 @@ enum my_keycodes {
 #define MY_MAGIC KC_F24
 
 #define NUM_ROCKET LT(_NUMBERS, MY_ROCKET)
-#define SYM_ENTER  LT(_SYMBOLS, KC_ENTER)
+#define SYM_TAB  LT(_SYMBOLS, KC_ENTER)
 
-#define NAV_MAGIC  LT(_NAVIGATION, MY_MAGIC)
-#define LYR_SYS       MO(_SYSTEM)
+#define SYS_MAGIC  LT(_NAVIGATION, MY_MAGIC)
+#define NAV_       MO(_NAVIGATION)
