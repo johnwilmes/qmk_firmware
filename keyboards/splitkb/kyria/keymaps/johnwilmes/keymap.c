@@ -267,7 +267,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        XXXXXXX, KC_W, KC_F,  KC_M ,   KC_P ,    KC_V  ,                                                    KC_K  , MY_DASH, MY_LINE, KC_SEMICOLON, KC_J, XXXXXXX,
        XXXXXXX, KC_R, KC_S,  KC_N ,   KC_T ,    KC_G  ,                                                  KC_QUOTE,   KC_A ,   KC_E ,     KC_I    , KC_H, XXXXXXX,
        XXXXXXX, KC_X, KC_C,  KC_L ,   KC_D ,    KC_B  , LAYER_LOCK,   XXXXXXX,      XXXXXXX, LAYER_LOCK,    KC_Z ,   KC_U ,   KC_O ,     KC_Y    , KC_Q, XXXXXXX,
-                           XXXXXXX, NUM_TAB, KC_SPACE ,  SYM_ENTER, MY_ROCKET,    SYS_MAGIC,   MY_COMMA,   MY_DOT,    _NAV, XXXXXXX
+                           XXXXXXX,  KC_TAB, KC_SPACE ,  SYM_ENTER, NUM_ROCKET,   NAV_MAGIC,   MY_COMMA,   MY_DOT, LYR_SYS, XXXXXXX
     ),
 
 /* Symbol Layer
@@ -324,9 +324,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      `----------------------------------'  `----------------------------------'
  */
     [_NAVIGATION] = LAYOUT(
-     _______, KC_F4,  KC_HOME  ,   KC_UP  ,    KC_END   ,  KC_F1,                                     _______,_______,_______,_______,_______,_______,
-      KC_F7 , KC_F5,  KC_LEFT  ,  KC_DOWN ,   KC_RIGHT  ,  KC_F2,                                     _______,KC_RSFT,KC_RCTL,MY_RALT,KC_RGUI,_______,
-     _______, KC_F6, KC_PAGE_UP, KC_INSERT, KC_PAGE_DOWN,  KC_F3,_______,_______,     _______,_______,_______,_______,_______,_______,_______,_______,
+     _______, KC_F5,  KC_HOME  ,   KC_UP  ,    KC_END   ,  KC_F1,                                     _______,_______,_______,_______,_______,_______,
+      KC_F8 , KC_F6,  KC_LEFT  ,  KC_DOWN ,   KC_RIGHT  ,  KC_F2,                                     _______,KC_RSFT,KC_RCTL,MY_RALT,KC_RGUI,_______,
+     _______, KC_F7, KC_PAGE_UP,   KC_F4  , KC_PAGE_DOWN,  KC_F3,_______,_______,     _______,_______,_______,_______,_______,_______,_______,_______,
                                    _______,   _______   ,_______,_______,_______,     _______,_______,_______,_______,_______
     ),
 
