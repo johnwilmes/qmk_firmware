@@ -400,7 +400,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        XXXXXXX, KC_W, KC_F,  KC_M ,   KC_P  ,    KC_V  ,                                                  KC_K  ,  MY_DASH, MY_LINE, KC_SEMICOLON, KC_J, XXXXXXX,
        XXXXXXX, KC_R, KC_S,  KC_N ,   KC_T  ,    KC_G  ,                                                KC_QUOTE,    KC_A ,   KC_E ,     KC_I    , KC_H, XXXXXXX,
        XXXXXXX, KC_X, KC_C,  KC_L ,   KC_D  ,    KC_B  , LAYER_LOCK, XXXXXXX,      XXXXXXX, LAYER_LOCK,    KC_Z ,    KC_U ,   KC_O ,     KC_Y    , KC_Q, XXXXXXX,
-                           XXXXXXX,MY_ROCKET, KC_SPACE ,   MO_SYM  ,  MO_NUM,       MO_SYS,   MO_NAV  ,   MY_DOT, MY_COMMA, XXXXXXX
+                           XXXXXXX,MY_ROCKET, KC_SPACE ,   MO_SYM  ,  MO_NUM,       MO_NAV,  MY_COMMA ,   MY_DOT,   MO_SYS, XXXXXXX
     ),
 
 /* Symbol Layer
