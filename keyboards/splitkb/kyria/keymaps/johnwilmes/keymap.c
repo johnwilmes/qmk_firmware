@@ -30,118 +30,151 @@ void keyboard_post_init_user(void) {
  **********/
 
 enum my_combos {
-  // Left hand mod-layer combos
-  COMBO_LSHIFT,
-  COMBO_LCTRL,
-  COMBO_LALT,
-  COMBO_LGUI,
-  COMBO_SYM_SHIFT,
-  COMBO_SYM_CTRL,
-  COMBO_SYM_ALT,
-  COMBO_SYM_GUI,
-  COMBO_NUM_SHIFT,
-  COMBO_NUM_CTRL,
-  COMBO_NUM_ALT,
-  COMBO_NUM_GUI,
-  // Right hand mod-layer combos
-  COMBO_RSHIFT,
-  COMBO_RCTRL,
-  COMBO_RALT,
-  COMBO_RGUI,
-  COMBO_SYS_SHIFT,
-  COMBO_SYS_CTRL,
-  COMBO_SYS_ALT,
-  COMBO_SYS_GUI,
-  COMBO_NAV_SHIFT,
-  COMBO_NAV_CTRL,
-  COMBO_NAV_ALT,
-  COMBO_NAV_GUI,
+    COMBO_BACKSPACE,
+    COMBO_DELETE,
+    COMBO_ESCAPE,
 
-  COMBO_ESCAPE,
-  COMBO_DELETE,
-  COMBO_BACKSPACE,
+    COMBO_ENTER,
+    COMBO_TAB,
+    COMBO_MAGIC,
 
-  COMBO_LENGTH,
+    // Left hand mod-layer combos
+    COMBO_LSHIFT,
+    COMBO_LCTRL,
+    COMBO_LALT,
+    COMBO_LGUI,
+    COMBO_SYM_SHIFT,
+    COMBO_SYM_CTRL,
+    COMBO_SYM_ALT,
+    COMBO_SYM_GUI,
+    COMBO_NUM_SHIFT,
+    COMBO_NUM_CTRL,
+    COMBO_NUM_ALT,
+    COMBO_NUM_GUI,
+    // Right hand mod-layer combos
+    COMBO_RSHIFT,
+    COMBO_RCTRL,
+    COMBO_RALT,
+    COMBO_RGUI,
+    COMBO_NAV_SHIFT,
+    COMBO_NAV_CTRL,
+    COMBO_NAV_ALT,
+    COMBO_NAV_GUI,
+    COMBO_SYS_SHIFT,
+    COMBO_SYS_CTRL,
+    COMBO_SYS_ALT,
+    COMBO_SYS_GUI,
+
+    COMBO_LENGTH,
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
-const uint16_t PROGMEM combo_lshift[] = {L_THUMB_I1, L_INDEX, COMBO_END};
-const uint16_t PROGMEM combo_lctrl[] = {L_THUMB_I1, L_MIDDLE, COMBO_END};
-const uint16_t PROGMEM combo_lalt[] = {L_THUMB_I1, L_RING, COMBO_END};
-const uint16_t PROGMEM combo_lgui[] = {L_THUMB_I1, L_PINKY, COMBO_END};
-const uint16_t PROGMEM combo_sym_shift[] = {L_THUMB, L_INDEX, COMBO_END};
-const uint16_t PROGMEM combo_sym_ctrl[] = {L_THUMB, L_MIDDLE, COMBO_END};
-const uint16_t PROGMEM combo_sym_alt[] = {L_THUMB, L_RING, COMBO_END};
-const uint16_t PROGMEM combo_sym_gui[] = {L_THUMB, L_PINKY, COMBO_END};
-const uint16_t PROGMEM combo_num_shift[] = {L_THUMB_O, L_INDEX, COMBO_END};
-const uint16_t PROGMEM combo_num_ctrl[] = {L_THUMB_O, L_MIDDLE, COMBO_END};
-const uint16_t PROGMEM combo_num_alt[] = {L_THUMB_O, L_RING, COMBO_END};
-const uint16_t PROGMEM combo_num_gui[] = {L_THUMB_O, L_PINKY, COMBO_END};
-const uint16_t PROGMEM combo_rshift[] = {R_THUMB_I1, R_INDEX, COMBO_END};
-const uint16_t PROGMEM combo_rctrl[] = {R_THUMB_I1, R_MIDDLE, COMBO_END};
-const uint16_t PROGMEM combo_ralt[] = {R_THUMB_I1, R_RING, COMBO_END};
-const uint16_t PROGMEM combo_rgui[] = {R_THUMB_I1, R_PINKY, COMBO_END};
-const uint16_t PROGMEM combo_nav_shift[] = {R_THUMB, R_INDEX, COMBO_END};
-const uint16_t PROGMEM combo_nav_ctrl[] = {R_THUMB, R_MIDDLE, COMBO_END};
-const uint16_t PROGMEM combo_nav_alt[] = {R_THUMB, R_RING, COMBO_END};
-const uint16_t PROGMEM combo_nav_gui[] = {R_THUMB, R_PINKY, COMBO_END};
-const uint16_t PROGMEM combo_sys_shift[] = {R_THUMB_O, R_INDEX, COMBO_END};
-const uint16_t PROGMEM combo_sys_ctrl[] = {R_THUMB_O, R_MIDDLE, COMBO_END};
-const uint16_t PROGMEM combo_sys_alt[] = {R_THUMB_O, R_RING, COMBO_END};
-const uint16_t PROGMEM combo_sys_gui[] = {R_THUMB_O, R_PINKY, COMBO_END};
-const uint16_t PROGMEM combo_escape[] = {R_INDEX_U, R_MIDDLE_U, R_RING_U, COMBO_END};
-const uint16_t PROGMEM combo_backspace[] = {R_INDEX_U, R_MIDDLE_U, COMBO_END};
-const uint16_t PROGMEM combo_delete[] = {R_MIDDLE_U, R_RING_U, COMBO_END};
+const uint16_t PROGMEM combo_backspace[] = {R_INDEX_D, R_MIDDLE_D, COMBO_END};
+const uint16_t PROGMEM combo_delete[]    = {R_MIDDLE_D, R_RING_D, COMBO_END};
+const uint16_t PROGMEM combo_escape[]    = {R_INDEX_D, R_MIDDLE_D, R_RING_D, COMBO_END};
+const uint16_t PROGMEM combo_enter[]     = {L_INDEX_D, L_MIDDLE_D, COMBO_END};
+const uint16_t PROGMEM combo_tab[]       = {L_MIDDLE_D, L_RING_D, COMBO_END};
+const uint16_t PROGMEM combo_magic[]     = {L_INDEX_D, L_MIDDLE_D, L_RING_D, COMBO_END};
 
+const uint16_t PROGMEM combo_lshift[]    = {L_THUMB_I1, L_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_lctrl[]     = {L_THUMB_I1, L_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_lalt[]      = {L_THUMB_I1, L_RING, COMBO_END};
+const uint16_t PROGMEM combo_lgui[]      = {L_THUMB_I1, L_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_sym_shift[] = {L_THUMB, L_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_sym_ctrl[]  = {L_THUMB, L_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_sym_alt[]   = {L_THUMB, L_RING, COMBO_END};
+const uint16_t PROGMEM combo_sym_gui[]   = {L_THUMB, L_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_num_shift[] = {L_THUMB_O, L_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_num_ctrl[]  = {L_THUMB_O, L_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_num_alt[]   = {L_THUMB_O, L_RING, COMBO_END};
+const uint16_t PROGMEM combo_num_gui[]   = {L_THUMB_O, L_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_rshift[]    = {R_THUMB_I1, R_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_rctrl[]     = {R_THUMB_I1, R_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_ralt[]      = {R_THUMB_I1, R_RING, COMBO_END};
+const uint16_t PROGMEM combo_rgui[]      = {R_THUMB_I1, R_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_nav_shift[] = {R_THUMB, R_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_nav_ctrl[]  = {R_THUMB, R_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_nav_alt[]   = {R_THUMB, R_RING, COMBO_END};
+const uint16_t PROGMEM combo_nav_gui[]   = {R_THUMB, R_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_sys_shift[] = {R_THUMB_O, R_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_sys_ctrl[]  = {R_THUMB_O, R_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_sys_alt[]   = {R_THUMB_O, R_RING, COMBO_END};
+const uint16_t PROGMEM combo_sys_gui[]   = {R_THUMB_O, R_PINKY, COMBO_END};
+
+// clang-format off
 combo_t key_combos[] = {
-  [COMBO_LSHIFT] = COMBO_ACTION(combo_lshift),
-  [COMBO_LCTRL] = COMBO_ACTION(combo_lctrl),
-  [COMBO_LALT] = COMBO_ACTION(combo_lalt),
-  [COMBO_LGUI] = COMBO_ACTION(combo_lgui),
-  [COMBO_SYM_SHIFT] = COMBO_ACTION(combo_sym_shift),
-  [COMBO_SYM_CTRL] = COMBO_ACTION(combo_sym_ctrl),
-  [COMBO_SYM_ALT] = COMBO_ACTION(combo_sym_alt),
-  [COMBO_SYM_GUI] = COMBO_ACTION(combo_sym_gui),
-  [COMBO_NUM_SHIFT] = COMBO_ACTION(combo_num_shift),
-  [COMBO_NUM_CTRL] = COMBO_ACTION(combo_num_ctrl),
-  [COMBO_NUM_ALT] = COMBO_ACTION(combo_num_alt),
-  [COMBO_NUM_GUI] = COMBO_ACTION(combo_num_gui),
-  [COMBO_RSHIFT] = COMBO_ACTION(combo_rshift),
-  [COMBO_RCTRL] = COMBO_ACTION(combo_rctrl),
-  [COMBO_RALT] = COMBO_ACTION(combo_ralt),
-  [COMBO_RGUI] = COMBO_ACTION(combo_rgui),
-  [COMBO_NAV_SHIFT] = COMBO_ACTION(combo_nav_shift),
-  [COMBO_NAV_CTRL] = COMBO_ACTION(combo_nav_ctrl),
-  [COMBO_NAV_ALT] = COMBO_ACTION(combo_nav_alt),
-  [COMBO_NAV_GUI] = COMBO_ACTION(combo_nav_gui),
-  [COMBO_SYS_SHIFT] = COMBO_ACTION(combo_sys_shift),
-  [COMBO_SYS_CTRL] = COMBO_ACTION(combo_sys_ctrl),
-  [COMBO_SYS_ALT] = COMBO_ACTION(combo_sys_alt),
-  [COMBO_SYS_GUI] = COMBO_ACTION(combo_sys_gui),
-  [COMBO_ESCAPE] = COMBO(combo_escape, KC_ESC),
-  [COMBO_BACKSPACE] = COMBO(combo_backspace, KC_BSPC),
-  [COMBO_DELETE] = COMBO(combo_delete, KC_DEL),
+    [COMBO_BACKSPACE] = COMBO(combo_backspace, KC_BSPC),
+    [COMBO_DELETE] = COMBO(combo_delete, KC_DEL),
+    [COMBO_ESCAPE] = COMBO(combo_escape, KC_ESC),
+
+    [COMBO_ENTER] = COMBO(combo_enter, KC_ENTER),
+    [COMBO_TAB] = COMBO(combo_tab, KC_TAB),
+    [COMBO_MAGIC] = COMBO(combo_magic, MY_MAGIC),
+
+    [COMBO_LSHIFT] = COMBO_ACTION(combo_lshift),
+    [COMBO_LCTRL] = COMBO_ACTION(combo_lctrl),
+    [COMBO_LALT] = COMBO_ACTION(combo_lalt),
+    [COMBO_LGUI] = COMBO_ACTION(combo_lgui),
+    [COMBO_SYM_SHIFT] = COMBO_ACTION(combo_sym_shift),
+    [COMBO_SYM_CTRL] = COMBO_ACTION(combo_sym_ctrl),
+    [COMBO_SYM_ALT] = COMBO_ACTION(combo_sym_alt),
+    [COMBO_SYM_GUI] = COMBO_ACTION(combo_sym_gui),
+    [COMBO_NUM_SHIFT] = COMBO_ACTION(combo_num_shift),
+    [COMBO_NUM_CTRL] = COMBO_ACTION(combo_num_ctrl),
+    [COMBO_NUM_ALT] = COMBO_ACTION(combo_num_alt),
+    [COMBO_NUM_GUI] = COMBO_ACTION(combo_num_gui),
+
+    [COMBO_RSHIFT] = COMBO_ACTION(combo_rshift),
+    [COMBO_RCTRL] = COMBO_ACTION(combo_rctrl),
+    [COMBO_RALT] = COMBO_ACTION(combo_ralt),
+    [COMBO_RGUI] = COMBO_ACTION(combo_rgui),
+    [COMBO_NAV_SHIFT] = COMBO_ACTION(combo_nav_shift),
+    [COMBO_NAV_CTRL] = COMBO_ACTION(combo_nav_ctrl),
+    [COMBO_NAV_ALT] = COMBO_ACTION(combo_nav_alt),
+    [COMBO_NAV_GUI] = COMBO_ACTION(combo_nav_gui),
+    [COMBO_SYS_SHIFT] = COMBO_ACTION(combo_sys_shift),
+    [COMBO_SYS_CTRL] = COMBO_ACTION(combo_sys_ctrl),
+    [COMBO_SYS_ALT] = COMBO_ACTION(combo_sys_alt),
+    [COMBO_SYS_GUI] = COMBO_ACTION(combo_sys_gui),
+
 };
+// clang-format on
 
 static uint8_t combo_mod_state = 0;
 
 static uint8_t _get_mod(uint16_t combo_index) {
     switch (combo_index) {
         case COMBO_LSHIFT:
+        case COMBO_SYM_SHIFT:
+        case COMBO_NUM_SHIFT:
             return MOD_BIT(KC_LSFT);
         case COMBO_LCTRL:
+        case COMBO_SYM_CTRL:
+        case COMBO_NUM_CTRL:
             return MOD_BIT(KC_LCTL);
         case COMBO_LALT:
+        case COMBO_SYM_ALT:
+        case COMBO_NUM_ALT:
             return MOD_BIT(KC_LALT);
         case COMBO_LGUI:
+        case COMBO_SYM_GUI:
+        case COMBO_NUM_GUI:
             return MOD_BIT(KC_LGUI);
         case COMBO_RSHIFT:
+        case COMBO_SYS_SHIFT:
+        case COMBO_NAV_SHIFT:
             return MOD_BIT(KC_RSFT);
         case COMBO_RCTRL:
+        case COMBO_SYS_CTRL:
+        case COMBO_NAV_CTRL:
             return MOD_BIT(KC_RCTL);
         case COMBO_RALT:
+        case COMBO_SYS_ALT:
+        case COMBO_NAV_ALT:
             return MOD_BIT(MY_RALT);
         case COMBO_RGUI:
+        case COMBO_SYS_GUI:
+        case COMBO_NAV_GUI:
             return MOD_BIT(KC_RGUI);
     }
     return 0;
@@ -149,30 +182,66 @@ static uint8_t _get_mod(uint16_t combo_index) {
 
 #define LEFT_HAND 1
 #define RIGHT_HAND 2
-
 static uint8_t _get_hand(uint16_t combo_index) {
     switch (combo_index) {
         case COMBO_LSHIFT:
         case COMBO_LCTRL:
         case COMBO_LALT:
         case COMBO_LGUI:
+        case COMBO_SYM_SHIFT:
+        case COMBO_SYM_CTRL:
+        case COMBO_SYM_ALT:
+        case COMBO_SYM_GUI:
+        case COMBO_NUM_SHIFT:
+        case COMBO_NUM_CTRL:
+        case COMBO_NUM_ALT:
+        case COMBO_NUM_GUI:
             return LEFT_HAND;
         case COMBO_RSHIFT:
         case COMBO_RCTRL:
         case COMBO_RALT:
         case COMBO_RGUI:
+        case COMBO_SYS_SHIFT:
+        case COMBO_SYS_CTRL:
+        case COMBO_SYS_ALT:
+        case COMBO_SYS_GUI:
+        case COMBO_NAV_SHIFT:
+        case COMBO_NAV_CTRL:
+        case COMBO_NAV_ALT:
+        case COMBO_NAV_GUI:
             return RIGHT_HAND;
     }
     return 0;
-
 }
 
 static uint8_t _get_layer(uint16_t combo_index) {
+    switch (combo_index) {
+        case COMBO_SYM_SHIFT:
+        case COMBO_SYM_CTRL:
+        case COMBO_SYM_ALT:
+        case COMBO_SYM_GUI:
+            return _SYMBOLS;
+        case COMBO_NUM_SHIFT:
+        case COMBO_NUM_CTRL:
+        case COMBO_NUM_ALT:
+        case COMBO_NUM_GUI:
+            return _NUMBERS;
+        case COMBO_NAV_SHIFT:
+        case COMBO_NAV_CTRL:
+        case COMBO_NAV_ALT:
+        case COMBO_NAV_GUI:
+            return _NAVIGATION;
+        case COMBO_SYS_SHIFT:
+        case COMBO_SYS_CTRL:
+        case COMBO_SYS_ALT:
+        case COMBO_SYS_GUI:
+            return _SYSTEM;
+    }
     return 0;
 }
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
-    uint8_t mod = _get_mod(combo_index);
+    uint8_t mod   = _get_mod(combo_index);
     uint8_t layer = _get_layer(combo_index);
     if (pressed) {
         if (mod) {
@@ -209,17 +278,16 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     // release early by returning true
     uint8_t mod;
     switch (keycode) {
-        case L_THUMB_I2:
         case L_THUMB_I1:
         case L_THUMB:
         case L_THUMB_O:
-        case R_THUMB_I2:
         case R_THUMB_I1:
         case R_THUMB:
         case R_THUMB_O:
-            /* Thumb releases end the combo; the release process is handled in process_combo_event
+            /* Thumbs are used for mod-layer combos, and releasing the thumb ends the
+             * combo
              */
-            return true; // thumb releases end the combo
+            return true;
         default:
             mod = _get_mod(combo_index);
             if (mod) {
@@ -242,18 +310,18 @@ bool get_combo_is_contiguous(uint16_t combo_index, combo_t *combo) {
  *****************/
 
 #define ko_make_modded(_trigger, _replacement, _trigger_mods, _suppressed_mods, _negative_mods) \
-    ((const key_override_t){                          \
-        .trigger_mods          = (_trigger_mods),    \
-        .layers                 = ~0,                 \
-        .suppressed_mods        = (_suppressed_mods), \
-        .options = ko_options_default,                \
-        .negative_mod_mask      = (_negative_mods),   \
-        .custom_action          = NULL,               \
-        .context                = NULL,               \
-        .trigger                = (_trigger),         \
-        .replacement            = (_replacement),     \
-        .enabled                = NULL,               \
-     })
+    ((const key_override_t){                                                                    \
+        .trigger_mods      = (_trigger_mods),                                                   \
+        .layers            = ~0,                                                                \
+        .suppressed_mods   = (_suppressed_mods),                                                \
+        .options           = ko_options_default,                                                \
+        .negative_mod_mask = (_negative_mods),                                                  \
+        .custom_action     = NULL,                                                              \
+        .context           = NULL,                                                              \
+        .trigger           = (_trigger),                                                        \
+        .replacement       = (_replacement),                                                    \
+        .enabled           = NULL,                                                              \
+    })
 
 /* Press shift to activate a different shifted thing */
 #define ko_shift_to_shift(_trigger, _replacement) ko_make_modded(_trigger, _replacement, MOD_MASK_SHIFT, 0, 0)
@@ -264,24 +332,28 @@ bool get_combo_is_contiguous(uint16_t combo_index, combo_t *combo) {
 /* Don't press shift to activate a different unshifted thing */
 #define ko_unshift_to_unshift(_trigger, _replacement) ko_make_modded(_trigger, _replacement, 0, MOD_MASK_SHIFT, MOD_MASK_SHIFT)
 
-const key_override_t exclaim_ko = ko_shift_to_shift(MY_DOT, KC_EXCLAIM);
-const key_override_t question_ko = ko_shift_to_shift(MY_COMMA, KC_QUESTION);
-//const key_override_t line_ko = ko_unshift_to_shift(MY_LINE, KC_UNDERSCORE);
-const key_override_t backslash_ko = ko_shift_to_unshift(MY_LINE, KC_BACKSLASH);
-//const key_override_t dash_ko = ko_unshift_to_unshift(MY_DASH, KC_MINUS);
-const key_override_t slash_ko = ko_shift_to_unshift(MY_DASH, KC_SLASH);
-//const key_override_t percent_ko = ko_unshift_to_shift(MY_PERCENT, KC_PERCENT);
-//const key_override_t plus_ko = ko_unshift_to_shift(MY_PLUS, KC_PLUS);
-const key_override_t times_ko = ko_shift_to_shift(MY_PLUS, KC_ASTERISK);
-const key_override_t equals_ko = ko_shift_to_unshift(MY_EQUAL, KC_EQUAL);
-const key_override_t pipe_ko = ko_shift_to_shift(MY_BOOL, KC_PIPE);
+/* Shift key for symbols */
+const key_override_t exclaim_ko    = ko_shift_to_shift(MY_DOT, KC_EXCLAIM);
+const key_override_t question_ko   = ko_shift_to_shift(MY_COMMA, KC_QUESTION);
+const key_override_t backslash_ko  = ko_shift_to_unshift(MY_LINE, KC_BACKSLASH);
+const key_override_t slash_ko      = ko_shift_to_unshift(MY_DASH, KC_SLASH);
+const key_override_t times_ko      = ko_shift_to_shift(MY_PLUS, KC_ASTERISK);
+const key_override_t equals_ko     = ko_shift_to_unshift(MY_EQUAL, KC_EQUAL);
+const key_override_t pipe_ko       = ko_shift_to_shift(MY_BOOL, KC_PIPE);
 const key_override_t circumflex_ko = ko_shift_to_shift(MY_REGEX, KC_CIRCUMFLEX);
-const key_override_t at_ko = ko_shift_to_shift(MY_HASH, KC_AT);
-const key_override_t paren_ko = ko_shift_to_shift(MY_PAREN, KC_RIGHT_PAREN);
-const key_override_t square_ko = ko_shift_to_unshift(MY_SQUARE, KC_RIGHT_BRACKET);
-const key_override_t curly_ko = ko_shift_to_shift(MY_CURLY, KC_RIGHT_CURLY_BRACE);
-const key_override_t angle_ko = ko_shift_to_shift(MY_ANGLE, KC_RIGHT_ANGLE_BRACKET);
+const key_override_t at_ko         = ko_shift_to_shift(MY_HASH, KC_AT);
+const key_override_t paren_ko      = ko_shift_to_shift(MY_PAREN, KC_RIGHT_PAREN);
+const key_override_t square_ko     = ko_shift_to_unshift(MY_SQUARE, KC_RIGHT_BRACKET);
+const key_override_t curly_ko      = ko_shift_to_shift(MY_CURLY, KC_RIGHT_CURLY_BRACE);
+const key_override_t angle_ko      = ko_shift_to_shift(MY_ANGLE, KC_RIGHT_ANGLE_BRACKET);
 
+/* Shift key for media */
+const key_override_t voldown_ko = ko_shift_to_unshift(MEDIA_LEFT, KC_AUDIO_VOL_DOWN);
+const key_override_t mute_ko    = ko_shift_to_unshift(MEDIA, KC_AUDIO_MUTE);
+const key_override_t volup_ko   = ko_shift_to_unshift(MEDIA_RIGHT, KC_AUDIO_VOL_UP);
+
+
+// clang-format off
 const key_override_t **key_overrides = (const key_override_t *[]){
     &exclaim_ko,
     &question_ko,
@@ -296,12 +368,17 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &square_ko,
     &curly_ko,
     &angle_ko,
-    NULL // Null terminate the array of overrides!
+    &voldown_ko,
+    &mute_ko,
+    &volup_ko,
+    NULL  // Null terminate the array of overrides!
 };
+// clang-format on
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    return true; // continue processing as usual
+    return true;  // continue processing as usual
 }
+
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -320,10 +397,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      `----------------------------------'  `----------------------------------'
  */
     [_BASE] = LAYOUT(
-       XXXXXXX, KC_W, KC_F,  KC_M ,   KC_P ,    KC_V  ,                                                    KC_K  , MY_DASH, MY_LINE, KC_SEMICOLON, KC_J, XXXXXXX,
-       XXXXXXX, KC_R, KC_S,  KC_N ,   KC_T ,    KC_G  ,                                                  KC_QUOTE,   KC_A ,   KC_E ,     KC_I    , KC_H, XXXXXXX,
-       XXXXXXX, KC_X, KC_C,  KC_L ,   KC_D ,    KC_B  , LAYER_LOCK,   XXXXXXX,      XXXXXXX, LAYER_LOCK,    KC_Z ,   KC_U ,   KC_O ,     KC_Y    , KC_Q, XXXXXXX,
-                           XXXXXXX,KC_ENTER, KC_SPACE ,  SYM_TAB  ,NUM_ROCKET,    SYS_MAGIC,    NAV_   ,   MY_DOT,MY_COMMA, XXXXXXX
+       XXXXXXX, KC_W, KC_F,  KC_M ,   KC_P  ,    KC_V  ,                                                  KC_K  ,  MY_DASH, MY_LINE, KC_SEMICOLON, KC_J, XXXXXXX,
+       XXXXXXX, KC_R, KC_S,  KC_N ,   KC_T  ,    KC_G  ,                                                KC_QUOTE,    KC_A ,   KC_E ,     KC_I    , KC_H, XXXXXXX,
+       XXXXXXX, KC_X, KC_C,  KC_L ,   KC_D  ,    KC_B  , LAYER_LOCK, XXXXXXX,      XXXXXXX, LAYER_LOCK,    KC_Z ,    KC_U ,   KC_O ,     KC_Y    , KC_Q, XXXXXXX,
+                           XXXXXXX,MY_ROCKET, KC_SPACE ,   MO_SYM  ,  MO_NUM,       MO_SYS,   MO_NAV  ,   MY_DOT, MY_COMMA, XXXXXXX
     ),
 
 /* Symbol Layer
@@ -349,11 +426,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Number Layer
  *
  * ,-----------------------------------------.                              ,-----------------------------------------.
- * |      |  A   |  6   |  5   |  4   |  D   |                              |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |                              |  D   |  4   |  5   |  6   |  A   |      |
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |  B   |  3   |  2   |  1   |  0   |  E   |                              |      |      |      |      |      |      |
- * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      |  C   |  9   |  8   |  7   |  F   |      |      |  |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |                              |  E   |  0   |  1   |  2   |  3   |  B   |
+ * |------+------+------+------+------+------+------+------.  ,------+------|------+------+------+------+------+------+
+ * |      |      |      |      |      |      |      |      |  |      |      |  F   |  7   |  8   |  9   |  C   |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
@@ -369,11 +446,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Nav Layer
  *
  * ,-----------------------------------------.                              ,-----------------------------------------.
- * |      |  F4  | HOME |  UP  | END  |  F1  |                              |      |      |      |      |      |      |
+ * |      |  F5  | HOME |  UP  | END  |  F1  |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |  F7  |  F5  | LEFT | DOWN |RIGHT |  F2  |                              |      |      |      |      |      |      |
+ * |      |  F6  | LEFT | DOWN |RIGHT |  F2  |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      |  F6  | PGUP |INSERT| PGDN |  F3  |      |      |  |      |      |      |      |      |      |      |      |
+ * |      |  F7  | PGUP |  F4  | PGDN |  F3  |      |      |  |      |      |      |      |      |      |      |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
@@ -381,7 +458,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_NAVIGATION] = LAYOUT(
      _______, KC_F5,  KC_HOME  ,   KC_UP  ,    KC_END   ,  KC_F1,                                     _______,_______,_______,_______,_______,_______,
-      KC_F8 , KC_F6,  KC_LEFT  ,  KC_DOWN ,   KC_RIGHT  ,  KC_F2,                                     _______,KC_RSFT,KC_RCTL,MY_RALT,KC_RGUI,_______,
+     _______, KC_F6,  KC_LEFT  ,  KC_DOWN ,   KC_RIGHT  ,  KC_F2,                                     _______,KC_RSFT,KC_RCTL,MY_RALT,KC_RGUI,_______,
      _______, KC_F7, KC_PAGE_UP,   KC_F4  , KC_PAGE_DOWN,  KC_F3,_______,_______,     _______,_______,_______,_______,_______,_______,_______,_______,
                                    _______,   _______   ,_______,_______,_______,     _______,_______,_______,_______,_______
     ),
@@ -389,21 +466,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* System and media layer
  *
  * ,-----------------------------------------.                              ,-----------------------------------------.
- * |      |      |      |      |      |      |                              | F10  | F11  |VOL_UP| F12  | F13  |      |
+ * |      |  F11 |S_HOME|SYS_UP| S_END|  F8  |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                              |PLY/PS|M_PREV|VOL_DN|M_NEXT| F14  | F15  |
+ * |      |  F12 |S_LEFT|S_DOWN|SRIGHT|  F9  |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |  |      |      | F16  | F17  | F18  | F19  | F20  |      |
+ * |      |  F13 |M_LEFT| MEDIA|MRIGHT|  F10 |      |      |  |      |      |      |      |      |      |      |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
     [_SYSTEM] = LAYOUT(
-     _______,KC_F13,       KC_F12      ,KC_AUDIO_VOL_UP  ,          KC_F11   ,      KC_F10       ,                                 _______,_______,_______,_______,_______,_______,
-     KC_F15, KC_F14,KC_MEDIA_PREV_TRACK,KC_AUDIO_VOL_DOWN,KC_MEDIA_NEXT_TRACK,KC_MEDIA_PLAY_PAUSE,                                 _______,KC_RSFT,KC_RCTL,MY_RALT,KC_RGUI,_______,
-     _______,KC_F20,       KC_F19      ,     KC_F18      ,          KC_F17   ,      KC_F16       ,_______,_______, _______,_______,_______,_______,_______,_______,_______,_______,
-                                                                          _______,_______,_______,_______,_______, _______,_______,_______,_______,_______
+     _______, KC_F11,  SYS_HOME ,  SYS_UP ,   SYS_END  , KC_F8 ,                                     _______,_______,_______,_______,_______,_______,
+     _______, KC_F12,  SYS_LEFT , SYS_DOWN,  SYS_RIGHT , KC_F9 ,                                     _______,KC_RSFT,KC_RCTL,MY_RALT,KC_RGUI,_______,
+     _______, KC_F13, MEDIA_LEFT,   MEDIA , MEDIA_RIGHT, KC_F10,_______,_______,     _______,_______,_______,_______,_______,_______,_______,_______,
+                                   _______,   _______  ,_______,_______,_______,     _______,_______,_______,_______,_______
     ),
 
 /*

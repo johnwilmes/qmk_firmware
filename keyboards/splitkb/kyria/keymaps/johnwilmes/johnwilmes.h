@@ -3,7 +3,7 @@
 #include "keyboard.h"
 
 enum layers {
-    _BASE = 0,
+    _BASE    = 0,
     _FINGERS = COMBO_ONLY_FROM_LAYER,
     _SYMBOLS,
     _NUMBERS,
@@ -15,9 +15,9 @@ enum layers {
 
 enum my_keycodes {
     FINGERS_START = SAFE_RANGE,
-    #define FINGERS_MACRO(...) __VA_ARGS__,
-    #include "fingers.def"
-    #undef FINGERS_MACRO
+#define FINGERS_MACRO(...) __VA_ARGS__,
+#include "fingers.def"
+#undef FINGERS_MACRO
     FINGERS_END,
 
     LAYER_LOCK,
@@ -42,11 +42,21 @@ enum my_keycodes {
 
 #define MY_RALT KC_LALT
 
-#define MY_ROCKET KC_F23
-#define MY_MAGIC KC_F24
+#define MY_ROCKET KC_F18
+#define MY_MAGIC KC_F19
 
-#define NUM_ROCKET LT(_NUMBERS, MY_ROCKET)
-#define SYM_TAB  LT(_SYMBOLS, KC_ENTER)
+#define MO_SYM MO(_SYMBOLS)
+#define MO_NUM MO(_NUMBERS)
+#define MO_NAV MO(_NAVIGATION)
+#define MO_SYS MO(_SYSTEM)
 
-#define SYS_MAGIC  LT(_NAVIGATION, MY_MAGIC)
-#define NAV_       MO(_NAVIGATION)
+#define MEDIA_LEFT KC_MEDIA_PREV_TRACK
+#define MEDIA KC_MEDIA_PLAY_PAUSE
+#define MEDIA_RIGHT KC_MEDIA_NEXT_TRACK
+
+#define SYS_UP KC_F14
+#define SYS_DOWN KC_F15
+#define SYS_LEFT KC_F16
+#define SYS_RIGHT KC_F17
+#define SYS_HOME KC_F20
+#define SYS_END KC_F21
