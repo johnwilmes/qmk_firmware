@@ -466,12 +466,12 @@ combo_active_state_t *init_combo_active_state(combo_state_t combo_index) {
 /* Insert into ripe queue, maintaining sort in order of increasing combo index */
 void ripen_combo(combo_state_t combo_index, combo_t *combo) {
     combo_iterator_t iter;
-    if (combo_index < GET_NEXT_COMBO_DIRECT(&ripe_head)) {
+    if (combo_index > GET_NEXT_COMBO_DIRECT(&ripe_head)) {
         combo_queue_insert(&ripe_head, combo_index, combo);
         return;
     }
     for (ALL_COMBOS_IN_QUEUE(&ripe_head, &iter)) {
-        if (combo_index < iter.combo_index) {
+        if (combo_index > iter.combo_index) {
             break;
         }
     }
@@ -540,7 +540,7 @@ void resolve_conflicts(void) {
             for (ALL_COMBOS_IN_KEY(qrecord, &conflict_iter)) {
                 uint8_t overlap = get_combo_overlap(ripe_iter.combo, conflict_iter.combo);
                 if (overlap) {
-                    if ((ripe_iter.combo_index < conflict_iter.combo_index) || (overlap < combo_length)) {
+                    if ((ripe_iter.combo_index > conflict_iter.combo_index) || (overlap < combo_length)) {
                         combo_iter_remove(&conflict_iter);
                         combo_queue_insert(&inactive_head, conflict_iter.combo_index, conflict_iter.combo);
                     } else {
