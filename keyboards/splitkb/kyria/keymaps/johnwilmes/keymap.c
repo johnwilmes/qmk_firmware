@@ -17,19 +17,41 @@
 
 #include "johnwilmes.h"
 
-/*
+#ifdef CONSOLE_ENABLE
 void keyboard_post_init_user(void) {
   debug_enable=true;
   debug_matrix=true;
   debug_keyboard=true;
 }
-*/
+#endif
+
+/************
+ * TAP/HOLD *
+ ************/
+
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MOD_SPACE:
+            if (1==record->event.key.row) {
+                return true;
+            }
+            return false;
+        case MY_DOT:
+            if (5==record->event.key.row) {
+                return true;
+            }
+            return false;
+    }
+    return false;
+}
 
 /**********
  * COMBOS *
  **********/
 
 enum my_combos {
+    COMBO_QU,
     COMBO_BACKSPACE,
     COMBO_DELETE,
     COMBO_ESCAPE,
@@ -65,6 +87,8 @@ enum my_combos {
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
+const uint16_t PROGMEM combo_qu[]        = {R_INDEX_OU, R_INDEX_U, COMBO_END};
+
 const uint16_t PROGMEM combo_backspace[] = {R_INDEX_D, R_MIDDLE_D, COMBO_END};
 const uint16_t PROGMEM combo_delete[]    = {R_MIDDLE_D, R_RING_D, COMBO_END};
 const uint16_t PROGMEM combo_escape[]    = {R_INDEX_D, R_MIDDLE_D, R_RING_D, COMBO_END};
@@ -88,13 +112,15 @@ const uint16_t PROGMEM combo_nav_shift[] = {R_THUMB, R_INDEX, COMBO_END};
 const uint16_t PROGMEM combo_nav_ctrl[]  = {R_THUMB, R_MIDDLE, COMBO_END};
 const uint16_t PROGMEM combo_nav_alt[]   = {R_THUMB, R_RING, COMBO_END};
 const uint16_t PROGMEM combo_nav_gui[]   = {R_THUMB, R_PINKY, COMBO_END};
-const uint16_t PROGMEM combo_sys_shift[] = {R_THUMB_O, R_INDEX, COMBO_END};
-const uint16_t PROGMEM combo_sys_ctrl[]  = {R_THUMB_O, R_MIDDLE, COMBO_END};
-const uint16_t PROGMEM combo_sys_alt[]   = {R_THUMB_O, R_RING, COMBO_END};
-const uint16_t PROGMEM combo_sys_gui[]   = {R_THUMB_O, R_PINKY, COMBO_END};
+const uint16_t PROGMEM combo_sys_shift[] = {R_THUMB_I2, R_INDEX, COMBO_END};
+const uint16_t PROGMEM combo_sys_ctrl[]  = {R_THUMB_I2, R_MIDDLE, COMBO_END};
+const uint16_t PROGMEM combo_sys_alt[]   = {R_THUMB_I2, R_RING, COMBO_END};
+const uint16_t PROGMEM combo_sys_gui[]   = {R_THUMB_I2, R_PINKY, COMBO_END};
 
 // clang-format off
 combo_t key_combos[] = {
+    [COMBO_QU] = COMBO(combo_qu, BIGRAM_QU),
+
     [COMBO_BACKSPACE] = COMBO(combo_backspace, KC_BSPC),
     [COMBO_DELETE] = COMBO(combo_delete, KC_DEL),
     [COMBO_ESCAPE] = COMBO(combo_escape, KC_ESC),
@@ -269,9 +295,11 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     uint8_t mod;
     uint8_t trans_layer;
     switch (keycode) {
+        case L_THUMB_I2:
         case L_THUMB_I1:
         case L_THUMB:
         case L_THUMB_O:
+        case R_THUMB_I2:
         case R_THUMB_I1:
         case R_THUMB:
         case R_THUMB_O:
@@ -377,6 +405,20 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 // clang-format on
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    uint8_t mods;
+    if (record->event.pressed) {
+        switch(keycode) {
+            case BIGRAM_QU:
+                mods = get_mods();
+                SEND_STRING("q");
+                set_mods(mods & ~MOD_MASK_SHIFT);
+                SEND_STRING("u");
+                set_mods(mods);
+                break;
+            default:
+                break;
+        }
+    }
     return true;  // continue processing as usual
 }
 
@@ -398,10 +440,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      `----------------------------------'  `----------------------------------'
  */
     [_BASE] = LAYOUT(
-       XXXXXXX, KC_Z, KC_F,  KC_M ,   KC_P  ,    KC_V  ,                                                   KC_K ,  MY_DASH, MY_LINE, KC_SEMICOLON, KC_J, XXXXXXX,
-       XXXXXXX, KC_R, KC_S,  KC_N ,   KC_T  ,    KC_G  ,                                                MY_QUOTE,    KC_A ,   KC_E ,     KC_I    , KC_H, XXXXXXX,
-       XXXXXXX, KC_W, KC_C,  KC_L ,   KC_D  ,    KC_B  , LAYER_LOCK,  XXXXXXX,      XXXXXXX, LAYER_LOCK,   KC_X ,    KC_U ,   KC_O ,     KC_Y    , KC_Q, XXXXXXX,
-                           XXXXXXX, MO_MOUSE, KC_SPACE ,   MO_SYM  , L_LEADER,     R_LEADER,   MO_NAV  ,  MY_DOT,   MO_SYS, XXXXXXX
+       XXXXXXX, KC_Z, KC_F,  KC_M ,   KC_P  ,     KC_V  ,                                                   KC_Q ,  MY_DASH, MY_LINE, KC_SEMICOLON, KC_J, XXXXXXX,
+       XXXXXXX, KC_R, KC_S,  KC_N ,   KC_T  ,     KC_G  ,                                                MY_QUOTE,    KC_A ,   KC_E ,     KC_I    , KC_H, XXXXXXX,
+       XXXXXXX, KC_W, KC_C,  KC_L ,   KC_D  ,     KC_B  , LAYER_LOCK,  XXXXXXX,      XXXXXXX, LAYER_LOCK,   KC_X ,    KC_U ,   KC_O ,     KC_Y    , KC_K, XXXXXXX,
+                           XXXXXXX, MO_MOUSE, MOD_SPACE ,   MO_SYM  , L_LEADER,     R_LEADER,   MO_NAV  ,  MY_DOT,   MO_SYS, XXXXXXX
     ),
 
 /* Symbol Layers

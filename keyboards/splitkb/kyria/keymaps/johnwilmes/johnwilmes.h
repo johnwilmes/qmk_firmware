@@ -23,12 +23,13 @@ enum my_keycodes {
 #undef FINGERS_MACRO
     FINGERS_END,
 
+    BIGRAM_QU,
     LAYER_LOCK,
 };
 
 /* ADDITIONAL KEYS */
 
-#define MY_DOT KC_DOT
+#define MY_DOT LT(_RIGHT_MOD, KC_DOT)
 #define MY_DASH KC_MINUS
 #define MY_LINE KC_UNDERSCORE
 #define MY_QUOTE KC_DOUBLE_QUOTE
@@ -57,6 +58,7 @@ enum my_keycodes {
 #define MEDIA KC_MEDIA_PLAY_PAUSE
 #define MEDIA_RIGHT KC_MEDIA_NEXT_TRACK
 
+#define MOD_SPACE LT(_LEFT_MOD, KC_SPACE)
 #define MO_SYM MO(_SYMBOLS)
 #define MO_BRKT MO(_BRACKETS)
 #define MO_NUM MO(_NUMBERS)

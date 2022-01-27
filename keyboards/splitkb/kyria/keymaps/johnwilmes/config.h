@@ -16,10 +16,11 @@
 
 #pragma once
 
-// Lets you roll mod-tap keys
-//#define IGNORE_MOD_TAP_INTERRUPT
-
-#define COMBO_TERM 25
+#define COMBO_TERM 40
 #define COMBO_ONLY_FROM_LAYER 1
 #define COMBO_CONTIGUOUS_PER_COMBO
+#define COMBO_PROCESS_KEY_RELEASE
 #define EXTRA_SMALL_COMBOS
+
+#define TAPPING_TERM 500
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
