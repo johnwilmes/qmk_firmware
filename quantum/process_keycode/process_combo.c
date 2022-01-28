@@ -208,7 +208,7 @@ __attribute__((weak)) uint16_t get_combo_term(uint16_t index, combo_t *combo) { 
 #endif
 
 #ifdef COMBO_CONTIGUOUS_PER_COMBO
-__attribute__((weak)) bool get_combo_is_contiguous(uint16_t index, combo_t *combo) { return true; }
+__attribute__((weak)) bool get_combo_interrupted(uint16_t index, combo_t *combo, keyrecord_t *record) { return true; }
 #endif
 
 #ifdef COMBO_DETAILED_EVENTS_PER_COMBO
@@ -929,7 +929,7 @@ bool process_combo(uint16_t keycode, keyrecord_t *record) {
                     DECREMENT_STATE(iter.combo);
                 } else
 #ifdef COMBO_CONTIGUOUS_PER_COMBO
-                    if (get_combo_is_contiguous(iter.combo_index, iter.combo))
+                    if (get_combo_interrupted(iter.combo_index, iter.combo, record))
 #endif
                 {
                     /* Inactivate partial combos that don't include this key
