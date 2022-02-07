@@ -972,7 +972,7 @@ void reset_combos(void) {
     key_buffer_head = key_buffer_size = 0;
     ripe_head = active_head = COMBO_NULL_STATE;
 
-    inactive_head = 0;
+    inactive_head  = 0;
     combo_t *combo = &key_combos[0];
     for (combo_state_t i = 0; i < COMBO_LEN; i++) {
         combo = &key_combos[i];
