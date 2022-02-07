@@ -55,6 +55,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 enum my_combos {
     COMBO_QU,
     COMBO_COMMA,
+    COMBO_DOT,
+    COMBO_EXCLAIM,
+    COMBO_QUESTION,
 
     COMBO_BACKSPACE,
     COMBO_DELETE,
@@ -92,7 +95,10 @@ enum my_combos {
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 const uint16_t PROGMEM combo_qu[]        = {R_INDEX_OU, R_INDEX_U, COMBO_END};
-const uint16_t PROGMEM combo_comma[]     = {L_THUMB, R_THUMB_I1, COMBO_END};
+const uint16_t PROGMEM combo_dot[]     = {L_THUMB_I1, R_THUMB_I1, COMBO_END};
+const uint16_t PROGMEM combo_comma[]     = {L_THUMB_I1, R_THUMB, COMBO_END};
+const uint16_t PROGMEM combo_exclaim[]     = {L_THUMB_I1, R_RING, COMBO_END};
+const uint16_t PROGMEM combo_question[]     = {L_THUMB_I1, R_PINKY_D, COMBO_END};
 
 const uint16_t PROGMEM combo_backspace[] = {R_INDEX_D, R_MIDDLE_D, COMBO_END};
 const uint16_t PROGMEM combo_delete[]    = {R_MIDDLE_D, R_RING_D, COMBO_END};
@@ -129,7 +135,10 @@ const uint16_t PROGMEM combo_fn_gui[]   = {R_THUMB_I2, R_PINKY, COMBO_END};
 // clang-format off
 combo_t key_combos[] = {
     [COMBO_QU] = COMBO(combo_qu, BIGRAM_QU),
+    [COMBO_DOT] = COMBO_ACTION(combo_dot),
     [COMBO_COMMA] = COMBO_ACTION(combo_comma),
+    [COMBO_EXCLAIM] = COMBO_ACTION(combo_exclaim),
+    [COMBO_QUESTION] = COMBO_ACTION(combo_question),
 
     [COMBO_BACKSPACE] = COMBO(combo_backspace, KC_BSPC),
     [COMBO_DELETE] = COMBO(combo_delete, KC_DEL),
@@ -297,8 +306,18 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             layer_on(trans_layer);
         }
         switch (combo_index) {
+            case COMBO_DOT:
+                SEND_STRING(". ");
+                return;
             case COMBO_COMMA:
                 SEND_STRING(", ");
+                return;
+            case COMBO_EXCLAIM:
+                SEND_STRING("! ");
+                return;
+            case COMBO_QUESTION:
+                SEND_STRING("? ");
+                return;
         }
     } else {
         if (mod || trans_layer) {
@@ -351,7 +370,7 @@ bool get_combo_interrupted(uint16_t combo_index, combo_t *combo, keyrecord_t *re
         case R_MIDDLE:
         case R_RING:
         case R_PINKY:
-            if (_get_combo_mod(combo_index) | _get_combo_transient_layer(combo_index)) {
+            if (_get_combo_mod(combo_index) || _get_combo_transient_layer(combo_index)) {
                 return false;
             }
     }
@@ -388,6 +407,9 @@ bool get_combo_must_hold(uint16_t combo_index, combo_t *combo) {
 uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
     if (get_combo_must_hold(combo_index, combo)) {
         return 200;
+    }
+    if ((combo_index == COMBO_COMMA) || (combo_index == COMBO_DOT) || (combo_index == COMBO_EXCLAIM) || (combo_index == COMBO_QUESTION)) {
+        return 125;
     }
     return COMBO_TERM;
 }
@@ -584,7 +606,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUMBERS] = LAYOUT(
        _______,_______,_______,_______,_______,_______,                                  _______, KC_4, KC_5, KC_6, _______, _______,
        _______, MO_HEX, MO_NUM,MO_BRKT,KC_LSFT,_______,                                     KC_E, KC_0, KC_1, KC_2, KC_3   , _______,
-       _______,_______,_______,_______,_______,_______,_______,_______,    _______,_______, KC_X, KC_7, KC_8, KC_9, _______, _______,
+       _______,OS_LGUI,OS_LALT,OS_LCTL,OS_LSFT,_______,_______,_______,    _______,_______, KC_X, KC_7, KC_8, KC_9, _______, _______,
                                _______,_______,_______,_______,_______,    _______,_______,_______,_______,_______
     ),
     [_HEX] = LAYOUT(
@@ -596,21 +618,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Nav Layer
  *
  * ,-----------------------------------------.                              ,-----------------------------------------.
- * |      |  F5  | HOME |  UP  | END  |  F1  |                              |      |      |      |      |      |      |
+ * |      |  F5  | PGUP |  UP  | PGDN |  F2  |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |      |  F6  | LEFT | DOWN |RIGHT |  F2  |                              |      |      |      |      |      |      |
+ * |      |  F4  | LEFT | DOWN | RIGHT|  F1  |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      |  F7  | PGUP |  F4  | PGDN |  F3  |      |      |  |      |      |      |      |      |      |      |      |
+ * |      |  F6  | HOME |  F7  | END  |  F3  |      |      |  |      |      |      |      |      |      |      |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
     [_NAVIGATION] = LAYOUT(
-     _______, KC_F5,  KC_HOME  ,   KC_UP  ,    KC_END   ,  KC_F1,                                     _______,_______,_______,_______,_______,_______,
-     _______, KC_F6,  KC_LEFT  ,  KC_DOWN ,   KC_RIGHT  ,  KC_F2,                                     _______,KC_RSFT,KC_RCTL,MY_RALT,KC_RGUI,_______,
-     _______, KC_F7, KC_PAGE_UP,   KC_F4  , KC_PAGE_DOWN,  KC_F3,_______,_______,     _______,_______,_______,MO_SYS1,MO_SYS2,MO_SYS3,MO_SYS4,_______,
-                                   _______,   _______   ,_______,_______,_______,     _______,_______,_______,_______,_______
+     _______, KC_F5, KC_PAGE_UP, KC_UP  , KC_PAGE_DOWN, KC_F2  ,                                     _______,_______,_______,_______,_______,_______,
+     _______, KC_F4, KC_LEFT   , KC_DOWN, KC_RIGHT    , KC_F1  ,                                     _______,KC_RSFT,KC_RCTL,MY_RALT,KC_RGUI,_______,
+     _______, KC_F6, KC_HOME   , KC_F7  , KC_END      , KC_F3  ,_______,_______,     _______,_______,_______,MO_SYS1,MO_SYS2,MO_SYS3,MO_SYS4,_______,
+                                 _______, _______     , _______,_______,_______,     _______,_______,_______,_______,_______
     ),
 
 /* System (Nav) Layer(s)

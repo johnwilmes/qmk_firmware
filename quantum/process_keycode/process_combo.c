@@ -608,6 +608,8 @@ void expire_key(queued_record_t *qrecord, uint16_t until, uint16_t tap) {
             }
         }
     }
+
+    resolve_conflicts();
 }
 
 /* Forces expiration (with specified keycode tap if tap!=0) of all combos
@@ -929,7 +931,7 @@ bool process_combo(uint16_t keycode, keyrecord_t *record) {
                     DECREMENT_STATE(iter.combo);
                 } else
 #ifdef COMBO_CONTIGUOUS_PER_COMBO
-                    if (get_combo_interrupted(iter.combo_index, iter.combo, record))
+                    if (get_combo_interrupted(iter.combo_index, iter.combo, &qrecord->record))
 #endif
                 {
                     /* Inactivate partial combos that don't include this key
