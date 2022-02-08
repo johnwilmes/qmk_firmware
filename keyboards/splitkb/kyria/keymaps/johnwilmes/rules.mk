@@ -6,3 +6,4 @@ COMBO_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
 CONSOLE_ENABLE = no
 SRC += implied_mods.c
+SRC += combos.c

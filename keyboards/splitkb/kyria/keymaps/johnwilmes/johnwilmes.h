@@ -16,6 +16,7 @@ enum layers {
     _SYSTEM2,
     _SYSTEM3,
     _SYSTEM4,
+    _SYSTEM5,
     _MOUSE,
 };
 
@@ -103,18 +104,20 @@ enum my_keycodes {
 #define SAVE_SCREEN C(KC_PRINT_SCREEN)
 
 #define MO_SYM MO(_SYMBOLS)
+#define MO_SYMS LM(_SYMBOLS, MOD_LSFT)
 #define MO_BRKT MO(_BRACKETS)
 #define MO_NUM MO(_NUMBERS)
 #define MO_HEX MO(_HEX)
 #define MO_NAV MO(_NAVIGATION)
+#define MO_NAVS LM(_NAVIGATION, MOD_LSFT)
+#define MO_NAVC LM(_NAVIGATION, MOD_LCTL)
+#define MO_NAVA LM(_NAVIGATION, MOD_LALT)
+#define MO_NAVG LM(_NAVIGATION, MOD_LGUI)
 #define MO_SYS1 MO(_SYSTEM1)
 #define MO_SYS2 MO(_SYSTEM2)
 #define MO_SYS3 MO(_SYSTEM3)
 #define MO_SYS4 MO(_SYSTEM4)
+#define MO_SYS5 MO(_SYSTEM5)
 #define MO_MOUSE MO(_MOUSE)
 
 #define MY_RALT KC_LALT
-#define OS_LSFT OSM(MOD_LSFT)
-#define OS_LCTL OSM(MOD_LCTL)
-#define OS_LALT OSM(MOD_LALT)
-#define OS_LGUI OSM(MOD_LGUI)
