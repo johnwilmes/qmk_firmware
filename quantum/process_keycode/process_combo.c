@@ -495,7 +495,7 @@ void ready_combo(combo_state_t combo_index, combo_t *combo) {
                 SET_NEXT_COMBO(qrecord, combo_index);
                 triggered = true;
             } else {
-                qrecord->state = COMBO_KEY_CONSUMED;
+                SET_STATE(qrecord, COMBO_KEY_CONSUMED);
                 SET_NEXT_COMBO(qrecord, combo_index);
             }
         }
@@ -705,10 +705,10 @@ void activate_combo(queued_record_t *qrecord) {
         if (get_combo_needs_details(combo_index, combo)) {
             triggers[0]                  = qrecord->record;
             uint8_t       trigger_index  = 1;
-            combo_state_t consumed_state = ((combo_index << COMBO_STATE_BITS) & COMBO_KEY_CONSUMED);
+            combo_state_t consumed_state = ((combo_index << COMBO_STATE_BITS) | COMBO_KEY_CONSUMED);
             for (uint8_t i = 0; i < key_buffer_size; i++) {
                 queued_record_t *buffer_entry = GET_QUEUED_RECORD(i);
-                if (qrecord->state == consumed_state) {
+                if (buffer_entry->state == consumed_state) {
                     triggers[trigger_index] = buffer_entry->record;
                     trigger_index++;
                 }
