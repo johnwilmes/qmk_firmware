@@ -38,28 +38,43 @@ enum my_keycodes {
 
 /* ADDITIONAL KEYS */
 
-//#define MY_SPACE LT(_LEFT_MOD, KC_SPACE)
-#define MY_SPACE KC_SPACE
-//#define MY_DOT LT(_RIGHT_MOD, KC_DOT)
-#define MY_DOT KC_DOT
+#define MY_RALT KC_LALT
 
-#define MY_DASH KC_MINUS
-#define MY_LINE KC_UNDERSCORE
+//#define MY_BACKSPACE LT(_LEFT_MOD, KC_BACKSPACE)
+#define MY_BACKSPACE KC_BACKSPACE
+//#define MY_SPACE LT(_RIGHT_MOD, KC_SPACE)
+#define MY_SPACE KC_SPACE
+
+/* The following all have shift overrides. We use the MY_XXX macros to make the different behavior
+ * more obvious */
+#define MY_DOT KC_DOT
+#define MY_COMMA KC_COMMA
 #define MY_QUOTE KC_DOUBLE_QUOTE
-#define MY_PLUS KC_PLUS
+#define MY_LINE KC_UNDERSCORE
+
+#define MY_PAREN KC_LEFT_PAREN
+#define MY_SQUARE KC_LEFT_BRACKET
+#define MY_CURLY KC_LEFT_CURLY_BRACE
+#define MY_ANGLE KC_LEFT_ANGLE_BRACKET
+
+#define MY_AT KC_AT
+#define MY_TICK KC_GRAVE
+#define MY_SLASH KC_SLASH
 #define MY_EQUAL KC_EQUAL
 #define MY_NOT KC_EXCLAIM
-#define MY_ANGLE KC_LEFT_ANGLE_BRACKET
-#define MY_GRAVE KC_GRAVE
-#define MY_HASH KC_HASH
+#define MY_PERCENT KC_PERCENT
+#define MY_ASTERISK KC_ASTERISK
 #define MY_REGEX KC_DOLLAR
 #define MY_BOOL KC_AMPERSAND
-#define MY_QUESTION KC_QUESTION
+#define MY_BACKSLASH KC_BACKSLASH
 
+/* Non-printable keys primarily used for vim bindings */
 #define L_LEADER KC_F17
 #define R_LEADER KC_F18
 #define MY_MAGIC KC_F19
 
+/* SYSTEM-LEVEL MACROS */
+/* Modifier generically used for system macros */
 #define SYS_MOD(kc) C(A(kc))
 
 #define LOCK_SCREEN SYS_MOD(KC_ESCAPE)
@@ -103,6 +118,7 @@ enum my_keycodes {
 #define SAVE_WINDOW C(A(KC_PRINT_SCREEN))
 #define SAVE_SCREEN C(KC_PRINT_SCREEN)
 
+/* LAYER SWITCHING */
 #define MO_SYM MO(_SYMBOLS)
 #define MO_SYMS LM(_SYMBOLS, MOD_LSFT)
 #define MO_BRKT MO(_BRACKETS)
@@ -119,5 +135,3 @@ enum my_keycodes {
 #define MO_SYS4 MO(_SYSTEM4)
 #define MO_SYS5 MO(_SYSTEM5)
 #define MO_MOUSE MO(_MOUSE)
-
-#define MY_RALT KC_LALT

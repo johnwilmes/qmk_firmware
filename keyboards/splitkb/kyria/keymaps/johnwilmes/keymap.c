@@ -76,43 +76,47 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 #define ko_unshift_to_unshift(_trigger, _replacement) ko_make_modded(_trigger, _replacement, 0, MOD_MASK_SHIFT, MOD_MASK_SHIFT)
 
 /* Shift key for symbols */
-const key_override_t comma_ko      = ko_shift_to_unshift(MY_DOT, KC_COMMA);
+const key_override_t colon_ko      = ko_shift_to_shift(MY_DOT, KC_COLON);
+const key_override_t semicolon_ko  = ko_shift_to_unshift(MY_COMMA, KC_SEMICOLON);
 const key_override_t quote_ko      = ko_shift_to_unshift(MY_QUOTE, KC_QUOTE);
-const key_override_t backslash_ko  = ko_shift_to_unshift(MY_LINE, KC_BACKSLASH);
-const key_override_t slash_ko      = ko_shift_to_unshift(MY_DASH, KC_SLASH);
-const key_override_t asterisk_ko   = ko_shift_to_shift(MY_PLUS, KC_ASTERISK);
+const key_override_t question_ko   = ko_shift_to_unshift(MY_LINE, KC_QUESTION);
+
+const key_override_t paren_ko      = ko_shift_to_shift(MY_PAREN, KC_RIGHT_PAREN);
+const key_override_t square_ko     = ko_shift_to_unshift(MY_SQUARE, KC_RIGHT_BRACKET);
+const key_override_t curly_ko      = ko_shift_to_shift(MY_CURLY, KC_RIGHT_CURLY_BRACE);
+const key_override_t angle_ko      = ko_shift_to_shift(MY_ANGLE, KC_RIGHT_ANGLE_BRACKET);
+
+const key_override_t tick_ko       = ko_shift_to_unshift(MY_TICK, KC_GRAVE);
+const key_override_t minus_ko      = ko_shift_to_unshift(MY_SLASH, KC_MINUS);
 const key_override_t equal_ko      = ko_shift_to_unshift(MY_EQUAL, KC_EQUAL);
 const key_override_t tilde_ko      = ko_shift_to_shift(MY_NOT, KC_TILDE);
-const key_override_t angle_ko      = ko_shift_to_shift(MY_ANGLE, KC_RIGHT_ANGLE_BRACKET);
-const key_override_t grave_ko      = ko_shift_to_unshift(MY_GRAVE, KC_GRAVE);
-const key_override_t percent_ko    = ko_shift_to_shift(MY_HASH, KC_PERCENT);
+const key_override_t hash_ko       = ko_shift_to_shift(MY_PERCENT, KC_HASH);
+const key_override_t plus_ko       = ko_shift_to_shift(MY_ASTERISK, KC_PLUS);
 const key_override_t circumflex_ko = ko_shift_to_shift(MY_REGEX, KC_CIRCUMFLEX);
 const key_override_t pipe_ko       = ko_shift_to_shift(MY_BOOL, KC_PIPE);
-const key_override_t at_ko         = ko_shift_to_shift(MY_QUESTION, KC_AT);
-
-/* Extra bracket overrides */
-const key_override_t paren_ko  = ko_shift_to_shift(KC_LPRN, KC_RPRN);
-const key_override_t square_ko = ko_shift_to_unshift(KC_LBRC, KC_RBRC);
-const key_override_t curly_ko  = ko_shift_to_shift(KC_LCBR, KC_RCBR);
+const key_override_t backslash_ko  = ko_shift_to_unshift(MY_BACKSLASH, KC_BACKSLASH);
 
 // clang-format off
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &comma_ko,
+    &colon_ko,
+    &semicolon_ko,
     &quote_ko,
-    &backslash_ko,
-    &slash_ko,
-    &asterisk_ko,
-    &equal_ko,
-    &tilde_ko,
-    &angle_ko,
-    &grave_ko,
-    &percent_ko,
-    &circumflex_ko,
-    &pipe_ko,
-    &at_ko,
+    &question_ko,
+
     &paren_ko,
     &square_ko,
     &curly_ko,
+    &angle_ko,
+
+    &tick_ko,
+    &minus_ko,
+    &equal_ko,
+    &tilde_ko,
+    &hash_ko,
+    &plus_ko,
+    &circumflex_ko,
+    &pipe_ko,
+    &backslash_ko,
     NULL  // Null terminate the array of overrides!
 };
 // clang-format on
@@ -177,21 +181,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Base Layer
  *
  * ,-----------------------------------------.                              ,-----------------------------------------.
- * |      |  Z   |  F   |  M   |  P   |  V   |                              |  K   | -  / | _  \ | ;  : |  J   |      |
+ * |      |  Z   |  F   |  M   |  P   |  V   |                              |  K   | ,  ; | .  : | "  ' |  J   |      |
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |      |  R   |  S   |  N   |  T   |  G   |                              | "  ' |  A   |  E   |  I   |  H   |      |
+ * |      |  R   |  S   |  N   |  T   |  G   |                              | _  ? |  A   |  E   |  I   |  H   |      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      |  W   |  C   |  L   |  D   |  B   | LOCK |      |  |      | LOCK |  X   |  U   |  O   |  Y   |  Q   |      |
+ * |      |  W   |  C   |  L   |  D   |  B   |      |      |  |      |      |  X   |  U   |  O   |  Y   |  Q   |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
- *                      |      |      |ENTER |SPACE |ROCKET|  | MAGIC| .  ! | ,  ? |      |      |
- *                      |      |      |  SYM |      |  SYS |  |  NAV |      |  NUM |      |      |
+ *                      |      |      |BSPACE| LEFT |LAYER |  |LAYER |RIGHT | SPACE|      |      |
+ *                      |      |      |      |LEADER| LOCK |  |LOCK  |LEADER|      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
     [_BASE] = LAYOUT(
-       XXXXXXX, KC_Z, KC_F, KC_M  , KC_P    ,  KC_V     ,                                               KC_Q    , MY_DASH, MY_LINE, KC_SEMICOLON, KC_J, XXXXXXX,
-       XXXXXXX, KC_R, KC_S, KC_N  , KC_T    ,  KC_G     ,                                               MY_QUOTE, KC_A   , KC_E   , KC_I        , KC_H, XXXXXXX,
-       XXXXXXX, KC_W, KC_C, KC_L  , KC_D    ,  KC_B     , XXXXXXX , XXXXXXX   ,   XXXXXXX   , XXXXXXX , KC_X    , KC_U   , KC_O   , KC_Y        , KC_K, XXXXXXX,
-                           XXXXXXX, MO_MOUSE,  MY_SPACE , L_LEADER, LAYER_LOCK,   LAYER_LOCK, R_LEADER, MY_DOT  , XXXXXXX, XXXXXXX
+       XXXXXXX, KC_Z, KC_F, KC_M  , KC_P    ,  KC_V         ,                                               KC_Q    , MY_COMMA, MY_DOT , MY_QUOTE, KC_J, XXXXXXX,
+       XXXXXXX, KC_R, KC_S, KC_N  , KC_T    ,  KC_G         ,                                               MY_LINE , KC_A    , KC_E   , KC_I    , KC_H, XXXXXXX,
+       XXXXXXX, KC_W, KC_C, KC_L  , KC_D    ,  KC_B         , XXXXXXX , XXXXXXX   ,   XXXXXXX   , XXXXXXX , KC_X    , KC_U    , KC_O   , KC_Y    , KC_K, XXXXXXX,
+                           XXXXXXX, MO_MOUSE,  MY_BACKSPACE , L_LEADER, LAYER_LOCK,   LAYER_LOCK, R_LEADER, MY_SPACE, XXXXXXX , XXXXXXX
     ),
 
 /*
@@ -209,10 +213,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_LEFT_MOD] = LAYOUT(
-      _______, _______, _______, MO_BRKT, MO_NUM , MO_HEX ,                                        _______, _______, _______, _______, _______, _______,
-      _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,                                        _______, _______, _______, _______, _______, _______,
-      _______, _______, _______, MO_SYM , MO_SYMS,KC_SPACE, _______, _______,    _______, _______, _______, _______, _______, _______, _______, _______,
-                                 _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______
+      _______, _______, MO_HEX , MO_BRKT, MO_NUM , _______     ,                                        _______, _______, _______, _______, _______, _______,
+      _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, MY_BACKSPACE,                                        _______, _______, _______, _______, _______, _______,
+      _______, _______, _______, MO_SYM , MO_SYMS, _______     , _______, _______,    _______, _______, _______, _______, _______, _______, _______, _______,
+                                 _______, _______, _______     , _______, _______,    _______, _______, _______, _______, _______
     ),
 
 
@@ -231,38 +235,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_RIGHT_MOD] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                        MO_SYS1, MO_SYS2, MO_SYS3, MO_SYS4, MO_SYS5, _______,
-      _______, _______, _______, _______, _______, _______,                                        _______, KC_RSFT, KC_RCTL, MY_RALT, KC_RGUI, _______,
-      _______, _______, _______, _______, _______, _______, _______, _______,    _______, _______, MO_NAV , MO_NAVS, MO_NAVC, MO_NAVA, MO_NAVG, _______,
-                                 _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______
+      _______, _______, _______, _______, _______, _______,                                        MO_SYS1 , MO_SYS2, MO_SYS3, MO_SYS4, MO_SYS5, _______,
+      _______, _______, _______, _______, _______, _______,                                        MY_SPACE, KC_RSFT, KC_RCTL, MY_RALT, KC_RGUI, _______,
+      _______, _______, _______, _______, _______, _______, _______, _______,    _______, _______, MO_NAV  , MO_NAVS, MO_NAVC, MO_NAVA, MO_NAVG, _______,
+                                 _______, _______, _______, _______, _______,    _______, _______, _______ , _______, _______
     ),
 
 /* Symbol Layers
  *
  * ,-----------------------------------------.                              ,-----------------------------------------.
- * |      |      |      |      |      |      |                              |      |  -/  |  _\  |  ;:  |      |      |
+ * |      |      |      |      |      |      |                              | @@   | ,;   | .:   | "'   | ``   |      |
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                              |  "'  |  +*( |  ==[ |  !~{ |  <>< |      |
+ * |      |      |      |      |      |      |                              | _?   | /- ()| == []| !~ {}| <> <>|      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |  |      |      |  ``  |  #%) |  $^] |  &|} |  ?@> |      |
+ * |      |      |      |      |      |      |      |      |  |      |      | %#   | *+   | $^   | &|   | \\   |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
     [_SYMBOLS] = LAYOUT(
-     _______,_______,_______,_______,_______,_______,                                      _______ , _______, _______ , _______, _______    , _______,
-     _______,_______,_______,_______,_______,_______,                                      _______ , MY_PLUS, MY_EQUAL, MY_NOT , MY_ANGLE   , _______,
-     _______,_______,_______,_______,_______,_______,_______,_______,     _______,_______, MY_GRAVE, MY_HASH, MY_REGEX, MY_BOOL, MY_QUESTION, _______,
-                             _______,_______,_______,_______,_______,     _______,_______, _______ , _______, _______
+     _______,_______,_______,_______,_______,_______,                                      MY_AT     , _______    , _______ , _______, MY_TICK     , _______,
+     _______,_______,_______,_______,_______,_______,                                      _______   , MY_SLASH   , MY_EQUAL, MY_NOT , MY_ANGLE    , _______,
+     _______,_______,_______,_______,_______,_______,_______,_______,     _______,_______, MY_PERCENT, MY_ASTERISK, MY_REGEX, MY_BOOL, MY_BACKSLASH, _______,
+                             _______,_______,_______,_______,_______,     _______,_______, _______   , _______    , _______
     ),
 
     /* Brackets implemented using separate layer rather than key-overrides like the other symbols,
      * because we want to retain ability to modify with CTRL using one-shot mods when needed */
     [_BRACKETS] = LAYOUT(
-     _______,_______,_______,_______,_______,_______,                                     _______, _______, _______, _______, _______ , _______,
-     _______,_______,_______,_______,_______,_______,                                     _______, KC_LPRN, KC_LBRC, KC_LCBR, MY_ANGLE, _______,
-     _______,_______,_______,_______,_______,_______,_______,_______,     _______,_______,_______, KC_RPRN, KC_RBRC, KC_RCBR, KC_RABK , _______,
+     _______,_______,_______,_______,_______,_______,                                     _______, _______ , _______  , _______ , _______ , _______,
+     _______,_______,_______,_______,_______,_______,                                     _______, MY_PAREN, MY_SQUARE, MY_CURLY, MY_ANGLE, _______,
+     _______,_______,_______,_______,_______,_______,_______,_______,     _______,_______,_______, _______ , _______  , _______ , _______ , _______,
                              _______,_______,_______,_______,_______,     _______,_______,_______, _______, _______
     ),
 
