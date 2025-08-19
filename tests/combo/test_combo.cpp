@@ -4,8 +4,7 @@
 
 #include "keyboard_report_util.hpp"
 #include "keycode.h"
-#include "test_common.h"
-#include "test_driver.hpp"
+#include "test_common.hpp"
 #include "test_fixture.hpp"
 #include "test_keymap_key.hpp"
 
@@ -25,7 +24,7 @@ TEST_F(Combo, combo_basic) {
     // Press key A, wait for less than COMBO_TERM, then press key B
     run_one_scan_loop(); // Ensure that combo timer is > 0
     key_a.press();
-    idle_for(COMBO_TERM-1);
+    idle_for(COMBO_TERM - 1);
     key_b.press();
     run_one_scan_loop();
     key_a.release();
@@ -163,5 +162,19 @@ TEST_F(Combo, combo_osmshift_tapped) {
     EXPECT_REPORT(driver, (KC_I, KC_LEFT_SHIFT));
     EXPECT_EMPTY_REPORT(driver);
     tap_key(key_i);
+    VERIFY_AND_CLEAR(driver);
+}
+
+TEST_F(Combo, combo_single_key) {
+    // https://github.com/qmk/qmk_firmware/issues/25197
+    TestDriver driver;
+    KeymapKey  key_t(0, 0, 0, KC_T);
+    set_keymap({key_t});
+
+    EXPECT_REPORT(driver, (KC_3)).Times(3);
+    EXPECT_EMPTY_REPORT(driver).Times(3);
+    tap_combo({key_t}, 1);
+    tap_combo({key_t}, 1);
+    tap_combo({key_t}, 1);
     VERIFY_AND_CLEAR(driver);
 }
