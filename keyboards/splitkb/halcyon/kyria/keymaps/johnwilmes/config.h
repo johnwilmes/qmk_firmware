@@ -19,10 +19,8 @@
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_CONTIGUOUS_PER_COMBO
 #define COMBO_PROCESS_KEY_RELEASE
-#define COMBO_MUST_HOLD_PER_COMBO
 #define COMBO_TERM_PER_COMBO
-#define COMBO_HOLD_TERM 200
-#define COMBO_TERM 125
+#define COMBO_TERM 600
 
 // These don't do actually do anything, if RGB matrix EEPROM has already been written
 // To set RGB matrix defaults, you need to explicitly reset EEPROM
